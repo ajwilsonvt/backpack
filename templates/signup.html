@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>backpack</title>
+        <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+        <link href="../static/signup.css" rel="stylesheet">
+    </head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" ><a href="/#">home</a></li>
+                    <li role="presentation"><a href="/#">sign in</a></li>
+                </ul>
+            </nav>
+                <h3 class="text-muted"><a href="/#">backpack</a></h3>
+        </div>
+
+        <div class="jumbotron">
+            <h1>backpack</h1>
+                <form class="form-signin">
+                    <label for="inputName" class="sr-only">name</label>
+                        <input type="name" name="inputName" id="inputName" class="form-control" placeholder=name required autofocus>
+                    <label for="inputEmail" class="sr-only">email address</label>
+                        <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="email address" required autofocus>
+                    <label for="inputPassword" class="sr-only">password</label>
+                        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="password" required>
+                    <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="button">sign up</button>
+                </form>
+        </div>
+
+        <footer class="footer">
+            <p>backpack</p>
+        </footer>
+
+        </div>
+
+        <!--start javascript at bottom of body for loading performance-->
+        <script type="text/javascript" src="../static/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#btnSignUp").click(function () {
+                    $.ajax({
+                        url: "/signUp",
+                        data: $("form").serialize(),
+                        type: "POST",
+                        success: function (response) {
+                            console.log(response);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            });
+        </script><!--end javascript-->
+</body>
+</html>
