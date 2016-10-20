@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+    <title>backpack</title>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/stylesheets/signup.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="/showAddNote">add note</a></li>
+                    <li role="presentation"><a href="/logout">logout</a></li>
+                </ul>
+            </nav>
+                <h3 class="text-muted"><a href="/">backpack</a></h3>
+        </div>
+
+        <section>
+            <form class="form-horizontal" method="post" action="/addNote">
+                <fieldset>
+                    <!--form name-->
+                    <legend>add note</legend>
+
+                    <!--title input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtTitle">title</label>
+                        <div class="col-md-4">
+                            <input id="txtTitle" name="inputTitle" type="text" class="form-control input-md"></input>
+                        </div>
+                    </div>
+
+                    <!--post input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtPost">note</label>
+                        <div class="col-md-4">
+                            <textarea class="form-control" id="txtPost" name="inputPost"></textarea>
+                        </div>
+                    </div>
+
+                    <!--button-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="singlebutton"></label>
+                        <div class="col-md-4">
+                            <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit" value="save"></input>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+
+        <footer class="footer">
+            <p>backpack</p>
+        </footer>
+
+    </div>
+</body>
+</html>

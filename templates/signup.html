@@ -12,24 +12,31 @@
         <div class="header">
             <nav>
                 <ul class="nav nav-pills pull-right">
-                    <li role="presentation" ><a href="/#">home</a></li>
+                    <li role="presentation" ><a href="/">home</a></li>
                     <li role="presentation"><a href="/showSignIn">sign in</a></li>
                 </ul>
             </nav>
-                <h3 class="text-muted"><a href="/#">backpack</a></h3>
+                <h3 class="text-muted"><a href="/">backpack</a></h3>
         </div>
 
         <div class="jumbotron">
             <h1>backpack</h1>
-                <form class="form-signin">
+                <form id="formSignUp" class="form-signin">
                     <label for="inputName" class="sr-only">name</label>
-                        <input type="name" name="inputName" id="inputName" class="form-control" placeholder=name required autofocus>
+                        <input type="name" name="inputName" id="inputName" class="form-control" placeholder=name autofocus>
+
                     <label for="inputEmail" class="sr-only">email address</label>
-                        <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="email address" required autofocus>
+                        <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="email address">
+
                     <label for="inputPassword" class="sr-only">password</label>
-                        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="password" required>
+                        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="password">
+
                     <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="button">submit</button>
                 </form>
+                <!--start dynamic section-->
+                    <h2 id="successMessage" class="text-success"></h2>
+                    <h4 id="errorMessage" class="text-danger"></h4>
+                <!--end dynamic section-->
         </div>
 
         <footer class="footer">
@@ -37,24 +44,7 @@
         </footer>
     </div>
 
-    <!--start javascript at bottom of body for loading performance-->
     <script type="text/javascript" src="../static/javascripts/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $("#btnSignUp").click(function () {
-                $.ajax({
-                    url: "/signUp",
-                    data: $("form").serialize(),
-                    type: "POST",
-                    success: function (response) {
-                        console.log(response);
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
-            });
-        });
-    </script><!--end javascript-->
+    <script type="text/javascript" src="../static/javascripts/signup.js"></script>
 </body>
 </html>
