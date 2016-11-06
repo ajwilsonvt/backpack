@@ -5,6 +5,7 @@
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
     <link href="../static/stylesheets/signup.css" rel="stylesheet">
+    <link href="../static/stylesheets/userhome.css" rel="stylesheet">
 </head>
 
 <body>
@@ -19,15 +20,52 @@
                 <h3 class="text-muted"><a href="#">backpack</a></h3>
         </div>
 
-        <div class="jumbotron">
-            <h1>welcome!</h1>
-            <div class="list-group">
-                <a href="#" class="list-group-item active">
-                    <!--start dynamic section-->
-                        <h4 class="list-group-item-heading"></h4>
-                        <p class="list-group-item-text"></p>
-                    <!--end dynamic section-->
-                </a>
+        <script id="listTemplate" type="text/x-jQuery-tmpl">
+            <li class="list-group-item">
+                <div class="checkbox">
+                    <label>${title}</label>
+                </div>
+
+                <div class="pull-right action-buttons">
+                    <a data-id=${id} onClick="edit(this)"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a data-id=${id} onClick="confirmDelete(this)"><span class="glyphicon glyphicon-trash"></span></a>
+                </div>
+            </li>
+        </script>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel-body">
+                    <ul id="ulist" class="list-group"></ul>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">close</span></button>
+                        <h4 class="modal-title" id="editModalLabel">update</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">title:</label>
+                                <input type="text" class="form-control" id="editTitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="control-label">post:</label>
+                                <textarea class="form-control" id="editPost"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+                        <button type="button" id="btnUpdate" class="btn btn-primary">update</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -38,5 +76,7 @@
 
     <script type="text/javascript" src="../static/javascripts/jquery.min.js"></script>
     <script type="text/javascript" src="../static/javascripts/userhome.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>

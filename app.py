@@ -108,6 +108,76 @@ def getNotes():
         cursor.close()
         conn.close()
 
+@app.route("/getNoteByID", methods=["POST"])
+def getNoteByID():
+    try:
+        conn = mysql.connect()
+        cursor = conn.cursor()
+
+        if session.get("user"):
+            _note_id = request.form["id"]
+            _user = session.get("user")
+
+            cursor.callproc("sp_getNoteByID", (_note_id, _user))
+            result = cursor.fetchall()
+
+            note = []
+            note.append({
+                "id": result[0][0],
+                "title": result[0][3],
+                "post": result[0][4]
+            })
+
+            return json.dumps(note)
+        else:
+            return render_template("error.html", error = "unauthorized access")
+    except Exception as e:
+        return render_template("error.html", error = str(e))
+    finally:
+        #close connection to database
+        cursor.close()
+        conn.close()
+
+@app.route("/updateNote", methods=["POST"])
+def updateNote():
+    try:
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        print "REACHED"
+
+        #this method doesn't work, it stops before it prints str(_user)
+        if session.get("user"):
+            print "BLOCK 1"
+            _note_id = request.form["id"]
+            _user = session.get("user")
+            _title = request.form["title"]
+            _post = request.form["post"]
+            print str(_user)
+
+            if _note_id and _user and _title and _post:
+                print "GOOD"
+            else:
+                print "BAD"
+
+            cursor.callproc("sp_updateNote",
+                (_note_id, _user, _title, _post))
+            data = cursor.fetchall()
+
+            if len(data) is 0:
+                print "BLOCK 2"
+                conn.commit()
+                return json.dumps({"status": "OK"})
+            else:
+                print "BLOCK 3"
+                return json.dumps({"status": "ERROR"})
+    except Exception as e:
+        print "exception -> " + str(e)
+        return json.dumps({"status": "unauthorized access"})
+    finally:
+        #close connection to database
+        cursor.close()
+        conn.close()
+
 #this function currently allows notes with empty title and post
 @app.route("/addNote", methods=["POST"])
 def addNote():
